@@ -1,21 +1,28 @@
 import { Injectable } from "@nestjs/common";
 
 let BUSES = [
-    { id: 1, name: 'Bus 1' },
-    { id: 2, name: 'Bus 2' },
-    { id: 3, name: 'Bus 3' },
-    { id: 4, name: 'Bus 4' }
+    { id: 1, brand: 'Złom' },
+    { id: 2, brand: 'Autosan' },
+    { id: 3, brand: 'Mercedes' },
+    { id: 4, brand: 'Solaris' }
 ];
 
 @Injectable()
 export class BusesService {
-    constructor() { }
 
-   getAll() {
+     getAll() {
         return BUSES;
-   }
+     }
 
-   getById(id: number) {
+     getById(id: number) {
         return BUSES.find(bus => bus.id === id);
-   }
+     }
+
+     add(brand: string) {
+        BUSES.push({ id: BUSES.length + 1, brand });
+     }
+
+     delete(id: number) {
+          BUSES = BUSES.filter(bus => bus.id !== id);
+     }
 }

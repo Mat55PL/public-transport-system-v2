@@ -1,11 +1,12 @@
 export declare class BusesService {
-    constructor();
     getAll(): {
         id: number;
-        name: string;
+        brand: string;
     }[];
     getById(id: number): {
         id: number;
-        name: string;
+        brand: string;
     };
+    add(brand: string): void;
+    delete(id: number): void;
 }

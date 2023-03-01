@@ -4,6 +4,11 @@ export declare class BusesController {
     constructor(busesService: BusesService);
     getAll(): {
         id: number;
-        name: string;
+        brand: string;
     }[];
+    getBusById(id: string): {
+        id: number;
+        brand: string;
+    };
+    deleteBusById(id: string): void;
 }
