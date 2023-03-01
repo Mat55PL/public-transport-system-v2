@@ -10,10 +10,12 @@ exports.BusesModule = void 0;
 const common_1 = require("@nestjs/common");
 const buses_controller_1 = require("./buses.controller");
 const buses_service_1 = require("./buses.service");
+const config_1 = require("@nestjs/config");
 let BusesModule = class BusesModule {
 };
 BusesModule = __decorate([
     (0, common_1.Module)({
+        imports: [config_1.ConfigModule],
         controllers: [buses_controller_1.BusesController],
         providers: [buses_service_1.BusesService]
     })

@@ -1,6 +1,6 @@
 import { IsString } from "class-validator";
 
-export class EditBusDTO {
+export class CreateBusDTO {
     brand: string;
     model: string;
     plate: string;

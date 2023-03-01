@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BusesController = void 0;
 const common_1 = require("@nestjs/common");
 const buses_service_1 = require("./buses.service");
+const create_bus_dto_1 = require("./DTOS/create-bus.dto");
+const edit_bus_dto_1 = require("./DTOS/edit-bus.dto");
 let BusesController = class BusesController {
     constructor(busesService) {
         this.busesService = busesService;
@@ -27,6 +29,12 @@ let BusesController = class BusesController {
     }
     deleteBusById(id) {
         return this.busesService.delete(parseInt(id));
+    }
+    addBus(body) {
+        return this.busesService.add(body.brand, body.model, body.plate);
+    }
+    editBus(id, body) {
+        return this.busesService.edit(parseInt(id), body.brand, body.model, body.plate);
     }
 };
 __decorate([
@@ -50,6 +58,21 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], BusesController.prototype, "deleteBusById", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_bus_dto_1.CreateBusDTO]),
+    __metadata("design:returntype", void 0)
+], BusesController.prototype, "addBus", null);
+__decorate([
+    (0, common_1.Patch)('/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, edit_bus_dto_1.EditBusDTO]),
+    __metadata("design:returntype", void 0)
+], BusesController.prototype, "editBus", null);
 BusesController = __decorate([
     (0, common_1.Controller)('buses'),
     __metadata("design:paramtypes", [buses_service_1.BusesService])
