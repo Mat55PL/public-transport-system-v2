@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 let BUSES = [
@@ -11,32 +11,40 @@ let BUSES = [
 
 @Injectable()
 export class BusesService {
-   constructor(private configService: ConfigService) { }
+   //constructor(private configService: ConfigService) { }
 
-     getAll() {
+   getAll() {
+      return BUSES;
+   }
+
+   getById(id: number) {
+      return BUSES.find(bus => bus.id === id);
+   }
+
+   add(brand: string, model: string, plate: string) {
+      const id = BUSES.length + 1;
+      const newBus = { id, brand, model, plate };
+      BUSES.push(newBus);
+      return newBus;
+   }
+
+   delete(id: number) {
+      BUSES = BUSES.filter(bus => bus.id !== id);
+      //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+   }
+
+   edit(id: number, brand: string, model: string, plate: string) {
+      try {
+         const index = BUSES.findIndex(bus => bus.id === id);
+         if(index === -1) {
+            throw new HttpException('Bus not found', HttpStatus.NOT_FOUND);
+         }
+         BUSES[index] = { id, brand, model, plate };
          return BUSES;
-     }
-
-     getById(id: number) {
-        return BUSES.find(bus => bus.id === id);
-     }
-
-     add(brand: string, model: string, plate: string) {
-        BUSES.push({ id: BUSES.length + 1, brand, model, plate});
-        //The push() method adds one or more elements to the end of an array and returns the new length of the array.
-        return BUSES;
-     }
-
-     delete(id: number) {
-          BUSES = BUSES.filter(bus => bus.id !== id);
-            //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
-     }
-
-     edit(id: number, brand: string, model: string, plate: string) {
-         const bus = BUSES.find(bus => bus.id === id);
-         bus.brand = brand;
-         bus.model = model;
-         bus.plate = plate;
-         return bus;
-       }
+      } catch (error) {
+         console.log(error);
+      }
+   }
 }
+
+

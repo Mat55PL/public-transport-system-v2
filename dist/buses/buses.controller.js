@@ -33,7 +33,7 @@ let BusesController = class BusesController {
     addBus(body) {
         return this.busesService.add(body.brand, body.model, body.plate);
     }
-    editBus(id, body) {
+    editBus(body, id) {
         return this.busesService.edit(parseInt(id), body.brand, body.model, body.plate);
     }
 };
@@ -67,10 +67,10 @@ __decorate([
 ], BusesController.prototype, "addBus", null);
 __decorate([
     (0, common_1.Patch)('/:id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, edit_bus_dto_1.EditBusDTO]),
+    __metadata("design:paramtypes", [edit_bus_dto_1.EditBusDTO, String]),
     __metadata("design:returntype", void 0)
 ], BusesController.prototype, "editBus", null);
 BusesController = __decorate([

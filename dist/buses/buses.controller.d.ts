@@ -22,11 +22,11 @@ export declare class BusesController {
         brand: string;
         model: string;
         plate: string;
-    }[];
-    editBus(id: string, body: EditBusDTO): {
+    };
+    editBus(body: EditBusDTO, id: string): {
         id: number;
         brand: string;
         model: string;
         plate: string;
-    };
+    }[];
 }

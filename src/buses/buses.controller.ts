@@ -26,11 +26,11 @@ export class BusesController {
 
     @Post()
     addBus(@Body() body: CreateBusDTO) {
-        return this.busesService.add(body.brand, body.model, body.plate);
+        return this.busesService.add(body.brand, body.model, body.plate)
     }
 
     @Patch('/:id')
-    editBus(@Param('id') id: string, @Body() body: EditBusDTO) {
+    editBus(@Body() body: EditBusDTO, @Param('id') id: string) {
         return this.busesService.edit(parseInt(id), body.brand, body.model, body.plate);
     }
 }
